@@ -1,0 +1,231 @@
+[
+    {
+     
+        "name":" LEATHER BAG",
+        "price":125.00,
+        "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+        "ratings":3.5,
+         "images":[
+            {
+                "image": "/images/a1.jpg"
+ 
+            }
+         ],
+         "hoverimages":[
+            {
+                "image": "/images/z1.jpg"
+ 
+            }
+         ],
+
+        "category":"Gift",
+        "mrpPrice":"100",
+        "stock":0,
+        "role":"admin",
+        "numOfReviews":12,
+        "reviews":[],
+        "productcode":"001",
+        "deliveryCharge":"50"
+ },
+ {
+     
+    "name":"LEATHER FLAP BAG",
+    "price":400,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":4.5,
+    "images":[
+        {
+            "image":"/images/a2.jpg" 
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z2.jpg"
+
+        }
+     ],
+
+    "category":"Indoor plants",
+    "mrpPrice":"100",
+    "seller":"Amazon",
+    "stock":5,
+    "numOfReviews":15,
+    "reviews":[],
+    "productcode":"002",
+    "deliveryCharge":"50"
+},
+{
+     
+    "name":"OVAL TOTE  BAG",
+    "price":300,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":3.5,
+    "images":[
+        {
+            "image": "/images/a3.jpg"
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z3.jpg"
+
+        }
+     ],
+
+    "category":"Indoor plants",
+    "mrpPrice":"100",
+    "seller":"Amazon",
+    "stock":5,
+    "numOfReviews":15,
+    "reviews":[],
+    "productcode":"003",
+    "deliveryCharge":"50"
+},
+{
+     
+    "name":"MEDIUM LEATHER TOTE  BAG",
+    "price":100,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":3.5,
+    "images":[
+        {
+            "image": "/images/a4.jpg"
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z4.jpg"
+
+        }
+     ],
+
+
+    "category":"Numismatist",
+    "seller":"Amazon",
+    "mrpPrice":"100",
+    "stock":12,
+    "numOfReviews":15,
+    "reviews":[],
+    "productcode":"004",
+    "deliveryCharge":"50"
+},
+{
+     
+    "name":"ZIPPED LEATHER SHOULDER BAG",
+    "price":700,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":5,
+    "images":[
+        {
+            "image": "/images/a3.jpg"
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z3.jpg"
+
+        }
+     ],
+    "category":"His & Her Essentials",
+    "seller":"Amazon",
+    "stock":3,
+    "mrpPrice":"100",
+    "numOfReviews":15,
+    "reviews":[],
+    "productcode":"005",
+    "deliveryCharge":"50"
+},
+{
+     
+    "name":" TOTE BAG WITH TUBULAR'S",
+    "price":600,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":5,
+    "images":[
+        {
+            "image": "/images/a1.jpg"
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z1.jpg"
+
+        }
+     ],
+    "category":"His & Her Essentials",
+    "seller":"Amazon",
+    "stock":10,
+    "numOfReviews":15,
+    "mrpPrice":"100",
+    "reviews":[],
+    "productcode":"006",
+    "deliveryCharge":"50"
+},
+{
+     
+    "name":" TOTE BAG PRINTED ",
+    "price":550,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":4.5,
+    "images":[
+        {
+            "image": "/images/a2.jpg"
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z2.jpg"
+
+        }
+     ],
+
+    "category":"His & Her Essentials",
+    "seller":"Amazon",
+    "stock":7,
+    "numOfReviews":15,
+    "mrpPrice":"100",
+    "reviews":[],
+    "productcode":"007",
+    "deliveryCharge":"50"
+},
+{
+     
+    "name":"LEATHER TOTE BAG METAL DEATAILS",
+    "price":600,
+    "description":"Leather tote bag available in caramel and black. Tumbled leather body with pleats. Tubular shoulder straps with knots. Lined interior with a zip pocket. Magnetic clasp closure.",
+
+    "ratings":5,
+    "images":[
+        {
+            "image": "/images/a4.jpg"
+
+        }
+     ],
+     "hoverimages":[
+        {
+            "image": "/images/z4.jpg"
+
+        }
+     ],
+    "category":"His & Her Essentials",
+    "seller":"Amazon",
+    "stock":5,
+    "numOfReviews":15,
+    "mrpPrice":"100",
+    "reviews":[],
+    "productcode":"008",
+    "deliveryCharge":"50"
+}
+]
