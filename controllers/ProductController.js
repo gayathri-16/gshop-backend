@@ -38,22 +38,21 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
       
    
 	try {
+
 		// const products = await Product.find({category:query}).populate(
 		// 	'category',
 		// 	'category'
 		// );
     const products = await Product.find({}).populate('category','category')
-    const filterproducts = await Product.find({category:query})
+    // const filterproducts = await Product.find({category:query})
 
 
-  console.log(products);
-  console.log(filterproducts);
+    console.log(products);
+    // console.log(filterproducts);
 
     // console.log('filtered Product',filterProducts);
 		res.status(200).json({ 
-      products,Category ,
-
-     
+      products,Category ,    
     });
     // console.log(products, Category);
 	} catch (err) {
