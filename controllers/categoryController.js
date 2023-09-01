@@ -26,9 +26,13 @@ exports.getCategories= catchAsyncError(async (req,res,next)=>{
 // Create Category - {{shop_url}}/api/v1/category/new
 exports.newCategory = catchAsyncError(async(req,res,next)=>{
    let images = []
+   let BASE_URL = process.env.BACKEND_URL;
+   if(process.env.NODE_ENV === "production"){
+       BASE_URL = `${req.protocol}://${req.get('host')}`
+   }
    if(req.files.length > 0) {
     req.files.forEach( file => {
-        let url = `${process.env.BACKEND_URL}/uploads/product/${file.originalname}`;
+        let url = `${BASE_URL}/uploads/product/${file.originalname}`;
         images.push({ image: url })
     })
 }
@@ -100,11 +104,14 @@ exports.updateCategory = async (req,res,next)=>{
   if(req.body.imagesCleared === 'false'){
     images = category.images
   }
-
+  let BASE_URL = process.env.BACKEND_URL;
+  if(process.env.NODE_ENV === "production"){
+      BASE_URL = `${req.protocol}://${req.get('host')}`
+  }
 
   if(req.files?.length > 0) {
     req.files.forEach( file => {
-        let url = `${process.env.BACKEND_URL}/uploads/product/${file.originalname}`;
+        let url = `${BASE_URL}/uploads/product/${file.originalname}`;
         images.push({ image: url })
     })
 }
