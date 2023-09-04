@@ -44,10 +44,10 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
 		// 	'category'
 		// );
     const products = await Product.find({}).populate('category','category')
-    // const filterproducts = await Product.find({category:query})
+    const filterproducts = await Product.findOne({category:'64e3a11f5a4d3e8ca258e42b'})
 
 
-    console.log(products);
+    console.log(filterproducts);
     // console.log(filterproducts);
 
     // console.log('filtered Product',filterProducts);

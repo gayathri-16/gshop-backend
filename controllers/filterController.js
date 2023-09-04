@@ -22,8 +22,8 @@ exports.getNewArrivals = async (req, res) => {
 
 exports.searchByQueryType = async (req, res) => {
 	const { type, query } = req.body;
-console.log(query);
-console.log(type)
+
+
 	try {
 		let filterproducts;
 
@@ -32,9 +32,15 @@ console.log(type)
 				filterproducts = await Product.find({ $text: { $search: query } });
 				break;
 			case 'category':
-				filterproducts = await Product.findById('');
+				filterproducts = await Product.find({category:'64e3a11f5a4d3e8ca258e42b'}).toArray((err,result)=>{
+					if(err){
+						console.log(err);
+						return
+					}
+					console.log(result);
+				});
 				console.log(query);
-				console.log('filter:',filterproducts)
+		
 				break;
 		}
 
