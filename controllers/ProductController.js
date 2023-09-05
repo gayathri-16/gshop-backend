@@ -23,44 +23,23 @@ exports.readByCount =catchAsyncError(async (req, res) => {
 
 exports.readAllProduct = catchAsyncError (async (req, res) => {
 
-      //all categories ids
-      let ids = [];
-      const categ = await Category.find({}, { _id: 1 });
-      categ.forEach(cat=>{
-        ids.push(cat.id)
-      })
+  // const apiFeatures = new APIFeatures(Product.find(),req.query).search().filter()
+  //   const products = await apiFeatures.query;
+  //   // const filterproducts = await Product.find({name:'LEATHER BAG'}).populate('category','category')
 
-      //filter
-
-      let cat = req.query.cat;
-      let query = cat !== '' ? req.query.cat: ids
-  
-      
-   
-	try {
-
-		// const products = await Product.find({category:query}).populate(
-		// 	'category',
-		// 	'category'
-		// );
     const products = await Product.find({}).populate('category','category')
-    const filterproducts = await Product.findOne({category:'64e3a11f5a4d3e8ca258e42b'})
 
-
-    console.log(filterproducts);
-    // console.log(filterproducts);
-
-    // console.log('filtered Product',filterProducts);
+    console.log(products)
+    // console.log('Filter Product',filterproducts);
 		res.status(200).json({ 
-      products,Category ,    
+      sucess:true,
+      count:products.length,
+      products    
     });
-    // console.log(products, Category);
-	} catch (err) {
-		console.log(err, 'productController.readAll error');
-		res.status(500).json({
-			errorMessage: 'Please try again later',
-		});
-	}
+
+
+	
+
 });
 
 

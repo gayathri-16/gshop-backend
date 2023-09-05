@@ -32,13 +32,8 @@ exports.searchByQueryType = async (req, res) => {
 				filterproducts = await Product.find({ $text: { $search: query } });
 				break;
 			case 'category':
-				filterproducts = await Product.find({category:'64e3a11f5a4d3e8ca258e42b'}).toArray((err,result)=>{
-					if(err){
-						console.log(err);
-						return
-					}
-					console.log(result);
-				});
+				filterproducts = await Product.find({category:query})
+					
 				console.log(query);
 		
 				break;
