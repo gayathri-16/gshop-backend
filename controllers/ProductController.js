@@ -27,17 +27,28 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
   //   const products = await apiFeatures.query;
   //   // const filterproducts = await Product.find({name:'LEATHER BAG'}).populate('category','category')
 
-    const products = await Product.find({}).populate('category','category')
+  const resPerPage = 8;
+    
+  let buildQuery = () => {
+      return new APIFeatures(Product.find(), req.query).search().filter()
+  }
+  
+  const filteredProductsCount = await buildQuery().query.countDocuments({})
+  const totalProductsCount = await Product.countDocuments({});
+  let productsCount = totalProductsCount;
 
-    console.log(products)
-    // console.log('Filter Product',filterproducts);
-		res.status(200).json({ 
-      sucess:true,
-      count:products.length,
-      products    
-    });
+  if(filteredProductsCount !== totalProductsCount) {
+      productsCount = filteredProductsCount;
+  }
+  
+  const products = await buildQuery().paginate(resPerPage).query;
 
-
+  res.status(200).json({
+      success : true,
+      count: productsCount,
+      resPerPage,
+      products
+  })
 	
 
 });
