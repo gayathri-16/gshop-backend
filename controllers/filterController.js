@@ -43,7 +43,9 @@ exports.searchByQueryType = async (req, res) => {
 		// 	filterproducts = await Product.find({});
 		// }
 
-		res.json({ filterproducts });
+		res.status(200).json({
+			 filterproducts 
+			});
 	} catch (err) {
 		console.log(err, 'filter Controller.searchByQueryType error');
 		res.status(500).json({
