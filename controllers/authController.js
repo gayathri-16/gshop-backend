@@ -5,7 +5,7 @@ const ErrorHandler=require('../utils/errorHandler')
 const sendToken = require('../utils/jwt')
 //register -user
 exports.registerUser = catchAsyncError(async (req, res, next)=>{
-   const{name, email, password,address,phone}= req.body;
+   const{firstname,lastname, email, password,street,city,phone}= req.body;
    
    let BASE_URL = process.env.BACKEND_URL;
    if(process.env.NODE_ENV === 'production'){
@@ -14,8 +14,10 @@ exports.registerUser = catchAsyncError(async (req, res, next)=>{
 
 
  const user =   await User.create({
-    name,
-    address,
+    firstname,
+    lastname,
+    street,
+    city,
     email,
     password,
     phone,
