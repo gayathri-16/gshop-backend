@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema({
     category: {
         type:mongoose.Schema.Types.ObjectId,
         ref: "Category",
-         required : [true, 'Product must belong to a category'],
+   
     
     },
     mrpPrice:{
