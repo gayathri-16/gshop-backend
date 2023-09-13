@@ -97,59 +97,35 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
 //Create Product - {{base_url}}/api/v1/product/new
 exports.newProduct = catchAsyncError(async(req,res,next)=>{
 
-let images = []
-let BASE_URL = process.env.BACKEND_URL;
-if(process.env.NODE_ENV === "production"){
-    BASE_URL = `${req.protocol}://${req.get('host')}`
-}
-if(req.files?.length > 0) {
-req.files.forEach( file => {
-    let url = `${BASE_URL}/uploads/product/${file.originalname}`;
-    images.push({ image: url })
-})
-}
+  let images = []
+  let BASE_URL = process.env.BACKEND_URL;
+  if(process.env.NODE_ENV === "production"){
+      BASE_URL = `${req.protocol}://${req.get('host')}`
+  }
+  
+  if(req.files.length > 0) {
+      req.files.forEach( file => {
+          let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+          images.push({ image: url })
+      })
+  }
 
+  req.body.images = images;
 
-   const {
-    name,
-    price,
-    description,
-    mrpPrice,
-    productcode,
-    deliveryCharge,
-    category
-   } = req.body
-
-   try{
-    let product = new Product();
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.category = category;
-    product.mrpPrice = mrpPrice;
-    product.productcode = productcode;    
-    product.deliveryCharge = deliveryCharge;
-    product.images = images
-
- await product.save();
-
- res.status(201).json({
-  sucess:true,
-  product
-})
-   }
-   catch (err) {
-		console.log(err, 'productController.create error');
-		res.status(500).json({
-			errorMessage: 'Please try again later',
-		});
-	}
+  // req.body.user = req.user.id;
+  const product = await Product.create(req.body);
+  res.status(201).json({
+      success: true,
+      product
+  })
+});
+	
  
     
   // req.body.user= req.user.id;
 
 
-});
+
 
 
 //Get single product {{base_url}}/api/v1/product/:id
