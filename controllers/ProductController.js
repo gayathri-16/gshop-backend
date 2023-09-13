@@ -98,6 +98,7 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
 exports.newProduct = catchAsyncError(async(req,res,next)=>{
 
   let images = []
+  let hoverimages = []
   let BASE_URL = process.env.BACKEND_URL;
   if(process.env.NODE_ENV === "production"){
       BASE_URL = `${req.protocol}://${req.get('host')}`
@@ -105,12 +106,23 @@ exports.newProduct = catchAsyncError(async(req,res,next)=>{
   
   if(req.files.length > 0) {
       req.files.forEach( file => {
-          let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+          let url = `${BASE_URL}/uploads/product/images/${file.originalname}`;
           images.push({ image: url })
       })
   }
 
   req.body.images = images;
+
+  
+  if(req.files.length > 0) {
+      req.files.forEach( file => {
+          let url = `${BASE_URL}/uploads/product/hoverimages/${file.originalname}`;
+          hoverimages.push({ image: url })
+      })
+  }
+
+
+  req.body.images = hoverimages;
 
   // req.body.user = req.user.id;
   const product = await Product.create(req.body);
@@ -146,23 +158,33 @@ exports.updateProduct = async (req,res,next)=>{
   let product = await Product.findByIdAndUpdate(req.params.id);
  // uploading images
  let images = []
+ let hoverimages = []
   // if images not cleared we keep exisiting images
   if(req.body.imagesCleared === 'false'){
     images = product.images
   }
 
+  if(req.body.hoverimagesCleared === 'false'){
+    hoverimages = product.hoverimages
+  }
   let BASE_URL = process.env.BACKEND_URL;
   if(process.env.NODE_ENV === "production"){
       BASE_URL = `${req.protocol}://${req.get('host')}`
   }
  if(req.files?.length > 0) {
   req.files.forEach( file => {
-      let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+      let url = `${BASE_URL}/uploads/product/images/${file.originalname}`;
       images.push({ image: url })
   })
 }
-
 req.body.images = images;
+if(req.files?.length > 0) {
+  req.files.forEach( file => {
+      let url = `${BASE_URL}/uploads/product/hoverimages/${file.originalname}`;
+      hoverimages.push({ image: url })
+  })
+}
+req.body.hoverimages = hoverimages;
 
   if(!product){
     return res.status(404).json({

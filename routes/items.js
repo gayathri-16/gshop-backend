@@ -23,9 +23,9 @@ router.route('/review').delete(isAuthenticatedUser, deleteReview);
 router.route('/reviews').get(isAuthenticatedUser, getReviews);
 
 //Admin routes
-router.route('/admin/product/new').post(upload.array('images'), newProduct);
+router.route('/admin/product/new').post(upload.array('images','hoverimages'), newProduct);
 router.route('/admin/products').get(getAdminProducts);
-router.route('/admin/product/:id').put(upload.array('images'), updateProduct);
+router.route('/admin/product/:id').put(upload.array('images','hoverimages'), updateProduct);
 router.route('/admin/product/:id').delete(deleteProduct);
  
 
