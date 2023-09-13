@@ -27,7 +27,7 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
   //   const products = await apiFeatures.query;
   //   // const filterproducts = await Product.find({name:'LEATHER BAG'}).populate('category','category')
 
-  const resPerPage = 3;
+  const resPerPage = 8;
     
   let buildQuery = () => {
       return new APIFeatures(Product.find(), req.query).search().filter()
