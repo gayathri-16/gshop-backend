@@ -117,7 +117,7 @@ req.files.forEach( file => {
     mrpPrice,
     productcode,
     deliveryCharge,
-    productCategory
+    category
    } = req.body
 
    try{
@@ -125,7 +125,7 @@ req.files.forEach( file => {
     product.name = name;
     product.price = price;
     product.description = description;
-    product.productCategory = productCategory;
+    product.category = category;
     product.mrpPrice = mrpPrice;
     product.productcode = productcode;    
     product.deliveryCharge = deliveryCharge;
