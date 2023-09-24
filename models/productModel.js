@@ -27,19 +27,16 @@ const productSchema = new mongoose.Schema({
             }
         }
     ],
-    hoverimages: [
-        {
-            image: {
-                type: String,
-                require: true
-            }
-        }
-    ],
+ 
     category: {
         type:mongoose.Schema.Types.ObjectId,
         ref: "Category",
          required : [true, 'Product must belong to a category'],
     
+    },
+    isActive:{
+        type:Boolean,
+        required:true
     },
     mrpPrice:{
         type:Number,

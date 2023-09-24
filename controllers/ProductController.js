@@ -110,19 +110,26 @@ exports.newProduct = catchAsyncError(async(req,res,next)=>{
           images.push({ image: url })
       })
   }
+//   if(req.files.length > 0) {
+//     req.files.forEach( file => {
+//         let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+//         hoverimages.push({ image: url })
+//     })
+// }
 
   req.body.images = images;
+  // req.body.hoverimages = images;
 
-  let hoverimages = []
-  if(req.files.length > 0) {
-      req.files.forEach( file => {
-          let url = `${BASE_URL}/uploads/product/${file.originalname}`;
-          hoverimages.push({ image: url })
-      })
-  }
+  // let hoverimages = []
+  // if(req.files.length > 0) {
+  //     req.files.forEach( file => {
+  //         let hoverurl = `${BASE_URL}/uploads/product/${file.originalname}`;
+  //         hoverimages.push({ image: hoverurl })
+  //     })
+  // }
 
 
-  req.body.hoverimages = hoverimages;
+  // req.body.hoverimages = hoverimages;
 
   // req.body.user = req.user.id;
   const product = await Product.create(req.body);
