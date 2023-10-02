@@ -9,7 +9,10 @@ const categorySchema = new mongoose.Schema(
         unique:true,
         index:true
     },
-
+    isActive:{
+        type:Boolean,
+        required:true
+    },
 
     description:{
         type:String,  

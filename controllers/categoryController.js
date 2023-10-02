@@ -32,7 +32,7 @@ exports.newCategory = catchAsyncError(async(req,res,next)=>{
    }
    if(req.files.length > 0) {
     req.files.forEach( file => {
-        let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+        let url = `${BASE_URL}/uploads/images/${file.originalname}`;
         images.push({ image: url })
     })
 }
@@ -81,6 +81,20 @@ exports.readAll = async (req, res) => {
 		});
 	}
 };
+exports.getActiveCategory = async (req, res) => {
+	try {
+		const categories = await Category.find({isActive:true});
+
+		res.status(200).json({
+			categories,
+		});
+	} catch (err) {
+		console.log('category readAll error: ', err);
+		res.status(500).json({
+			errorMessage: 'Please try again later',
+		});
+	}
+};
 
 //Get single category {{base_url}}/api/v1/product/:id
 exports.getSingleCategory = async (req,res,next)=>{
@@ -111,7 +125,7 @@ exports.updateCategory = async (req,res,next)=>{
 
   if(req.files?.length > 0) {
     req.files.forEach( file => {
-        let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+        let url = `${BASE_URL}/uploads/images/${file.originalname}`;
         images.push({ image: url })
     })
 }

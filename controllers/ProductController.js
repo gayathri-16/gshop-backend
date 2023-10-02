@@ -7,7 +7,8 @@ const APIFeatures = require('../utils/apiFeatures')
 
 exports.readByCount =catchAsyncError(async (req, res) => {
 	try {
-		const products = await Product.find({})
+    
+		const products = await Product.find({isActive:true})
 			.populate('category', 'category')
 			.limit(6);
 
@@ -20,6 +21,20 @@ exports.readByCount =catchAsyncError(async (req, res) => {
 	}
 });
 
+exports.getActiveProduct = catchAsyncError(async (req, res) => {
+	try {
+    
+		const products = await Product.find({isActive:true})
+	
+
+		res.json({ products });
+	} catch (err) {
+		console.log(err, 'productController.readAll error');
+		res.status(500).json({
+			errorMessage: 'Please try again later',
+		});
+	}
+});
 
 exports.readAllProduct = catchAsyncError (async (req, res) => {
 
@@ -28,28 +43,35 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
   //   // const filterproducts = await Product.find({name:'LEATHER BAG'}).populate('category','category')
 
   const resPerPage = 8;
+   
+
+
+
+      let buildQuery = () => {
+        return new APIFeatures(Product.find({}), req.query).search().filter()
+    }
     
-  let buildQuery = () => {
-      return new APIFeatures(Product.find(), req.query).search().filter()
-  }
+    const filteredProductsCount = await buildQuery().query.countDocuments({})
+    const totalProductsCount = await Product.countDocuments({});
+    let productsCount = totalProductsCount;
   
-  const filteredProductsCount = await buildQuery().query.countDocuments({})
-  const totalProductsCount = await Product.countDocuments({});
-  let productsCount = totalProductsCount;
-
-  if(filteredProductsCount !== totalProductsCount) {
-      productsCount = filteredProductsCount;
-  }
-  
-  const products = await buildQuery().paginate(resPerPage).query;
-
-  res.status(200).json({
+    if(filteredProductsCount !== totalProductsCount) {
+        productsCount = filteredProductsCount;
+    }
+    
+    const products = await buildQuery().paginate(resPerPage).query;
+    res.status(200).json({
       success : true,
       count: productsCount,
       resPerPage,
-      products
-  })
-	
+      products,
+  
+  })  
+  
+  
+
+
+ 
 
 });
 
@@ -58,23 +80,10 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
 // exports.getProducts= catchAsyncError(async (req,res,next)=>{
 //   const resPerPage = 8;
 //   const apiFeatures = new APIFeatures(Product.find(), req.query).search().filter().paginate(resPerPage);
-//   const products  = await  apiFeatures.query;
-   
+//   const products  = await  apiFeatures.query;  
 //   await new Promise(resolve => setTimeout(resolve,1000));
 
-//   //all categories Ids
-
-//   let ids = []
-
-//   const categ = await Category.find({},{_id:1})
-//   categ.forEach(cat=>{
-//     ids.push(cat._id)
-//   })
-
-//   // filter 
-//   let cat = req.query.cat;
-//   let query = cat !== ''? cat : ids
-
+ 
 
 //    try{
 //        const productsCategory = await Product.find({category:query}).populate('category', 'name')
@@ -97,46 +106,38 @@ exports.readAllProduct = catchAsyncError (async (req, res) => {
 //Create Product - {{base_url}}/api/v1/product/new
 exports.newProduct = catchAsyncError(async(req,res,next)=>{
 
-  let images = []
-
   let BASE_URL = process.env.BACKEND_URL;
   if(process.env.NODE_ENV === "production"){
       BASE_URL = `${req.protocol}://${req.get('host')}`
   }
-  
+  let images = [] 
   if(req.files.length > 0) {
       req.files.forEach( file => {
-          let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+          let url = `${BASE_URL}/uploads/images/${file.originalname}`;
           images.push({ image: url })
+         
+         
       })
   }
+ req.body.images = images;
+
+//  let hoverimages = []
 //   if(req.files.length > 0) {
 //     req.files.forEach( file => {
-//         let url = `${BASE_URL}/uploads/product/${file.originalname}`;
-//         hoverimages.push({ image: url })
+//         let url = `${BASE_URL}/uploads/hoverimg/${file.originalname}`;
+//         hoverimages.push({ hoverimage: url })
 //     })
 // }
-
-  req.body.images = images;
-  // req.body.hoverimages = images;
-
-  // let hoverimages = []
-  // if(req.files.length > 0) {
-  //     req.files.forEach( file => {
-  //         let hoverurl = `${BASE_URL}/uploads/product/${file.originalname}`;
-  //         hoverimages.push({ image: hoverurl })
-  //     })
-  // }
-
-
-  // req.body.hoverimages = hoverimages;
+//  req.body.hoverimages = hoverimages;
 
   // req.body.user = req.user.id;
   const product = await Product.create(req.body);
+
   res.status(201).json({
       success: true,
       product
   })
+
 });
 	
  
@@ -181,7 +182,7 @@ exports.updateProduct = async (req,res,next)=>{
 
  if(req.files?.length > 0) {
   req.files.forEach( file => {
-      let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+      let url = `${BASE_URL}/uploads/images/${file.originalname}`;
       images.push({ image: url })
   })
 }
@@ -190,7 +191,7 @@ req.body.images = images;
 let hoverimages = []
 if(req.files?.length > 0) {
   req.files.forEach( file => {
-      let url = `${BASE_URL}/uploads/product/${file.originalname}`;
+      let url = `${BASE_URL}/uploads/hoverimg/${file.originalname}`;
       hoverimages.push({ image: url })
   })
 }

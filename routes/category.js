@@ -4,12 +4,12 @@ const  {isAuthenticatedUser, authorizeRoles } = require('../middlewares/authenti
 const router = express.Router();
 const multer = require('multer')
 const path = require('path');
-const { getCategories, getSingleCategory, newCategory, updateCategory, deleteCategory, getAdminCategories } = require('../controllers/categoryController');
+const { getCategories, getSingleCategory, newCategory, updateCategory, deleteCategory, getAdminCategories, getActiveCategory } = require('../controllers/categoryController');
 
 
 const upload = multer({storage: multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, path.join( __dirname,'..' , 'uploads/product' ))
+        cb(null, path.join( __dirname,'..' , 'uploads/images' ))
     },
     filename: function(req, file, cb ) {
         cb(null, file.originalname)
@@ -18,7 +18,7 @@ const upload = multer({storage: multer.diskStorage({
 
 router.route('/category').get(getCategories);
 router.route('/category/:id').get(getSingleCategory);
-
+router.route('/category/active').get(getActiveCategory);
 
 //Admin routes
 router.route('/admin/category/new').post( upload.array('images'), newCategory);
