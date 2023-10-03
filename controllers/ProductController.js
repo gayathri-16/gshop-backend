@@ -111,6 +111,7 @@ exports.newProduct = catchAsyncError(async(req,res,next)=>{
       BASE_URL = `${req.protocol}://${req.get('host')}`
   }
   let images = [] 
+  
   if(req.files.length > 0) {
       req.files.forEach( file => {
           let url = `${BASE_URL}/uploads/images/${file.originalname}`;
@@ -120,6 +121,7 @@ exports.newProduct = catchAsyncError(async(req,res,next)=>{
       })
   }
  req.body.images = images;
+
 
 //  let hoverimages = []
 //   if(req.files.length > 0) {
