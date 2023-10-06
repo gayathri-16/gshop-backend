@@ -36,6 +36,21 @@ exports.getActiveProduct = catchAsyncError(async (req, res) => {
 	}
 });
 
+exports.getInActiveProduct = catchAsyncError(async (req, res) => {
+	try {
+    
+		const products = await Product.find({isActive:false})
+	
+
+		res.json({ products });
+	} catch (err) {
+		console.log(err, 'productController.readAll error');
+		res.status(500).json({
+			errorMessage: 'Please try again later',
+		});
+	}
+});
+
 exports.readAllProduct = catchAsyncError (async (req, res) => {
 
   // const apiFeatures = new APIFeatures(Product.find(),req.query).search().filter()
